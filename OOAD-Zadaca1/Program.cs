@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace OOAD_Zadaca1
 {
@@ -11,9 +12,9 @@ namespace OOAD_Zadaca1
         {
             OoadWings = new OoadWings(new List<Klijent>(), new List<Avion>(),
                 new Dictionary<string, List<Tuple<Avion, DateTime, DateTime>>>());
-               
+
             unesiPodatke();
-            
+
             for (;;)
             {
                 int izbor = -1;
@@ -52,15 +53,11 @@ namespace OOAD_Zadaca1
                     bool ispravan = false;
                     while (!ispravan)
                     {
-                        try
+                        Console.Write("\nUnesite id novog klijenta: ");
+                        id = Console.ReadLine();
+                        if (id.Length == 6)
                         {
-                            Console.Write("\nUnesite id novog klijenta: ");
-                            id = Console.ReadLine();
                             ispravan = true;
-                        }
-                        catch (ArgumentException e)
-                        {
-                            Console.WriteLine(e.Message);
                         }
                     }
 
@@ -179,7 +176,7 @@ namespace OOAD_Zadaca1
                     Console.Write("\nUnesite id aviona za povratak: ");
                     id = Console.ReadLine();
                     double ukupnaCijena = OoadWings.VratiVozilo(id, kid);
-                    Console.Write("\nVozilo uspješno vraćeno. Ukupna cijena iznosi: " + ukupnaCijena +" KM");
+                    Console.Write("\nVozilo uspješno vraćeno. Ukupna cijena iznosi: " + ukupnaCijena + " KM");
                 }
                 else if (izbor == 5)
                 {
@@ -189,13 +186,15 @@ namespace OOAD_Zadaca1
 
         public static void unesiPodatke()
         {
-            OoadWings.Klijenti.Add(new DomaciKlijent("123456","Mujo","Mujic",new DateTime(1985,4,25)));
-            OoadWings.Klijenti.Add(new StraniKlijent("654321","Hans","Ziegler",new DateTime(1975,7,12),"Berlin","Njemačka"));
-            OoadWings.Avioni.Add(new TeretniAvion("abcde1234","Antonov",100,0.5));
-            OoadWings.Avioni.Add(new PutnickiLokalniAvion("4321abcde","Lockheed",1));
-            List<string> drzave=new List<string>();
-            drzave.Add("USA"); drzave.Add("USSR");
-            OoadWings.Avioni.Add(new PutnickiInostraniAvion("ussr4ever","Mig",2,drzave));
+            OoadWings.Klijenti.Add(new DomaciKlijent("123456", "Mujo", "Mujic", new DateTime(1985, 4, 25)));
+            OoadWings.Klijenti.Add(new StraniKlijent("654321", "Hans", "Ziegler", new DateTime(1975, 7, 12), "Berlin",
+                "Njemačka"));
+            OoadWings.Avioni.Add(new TeretniAvion("abcde1234", "Antonov", 100, 0.5));
+            OoadWings.Avioni.Add(new PutnickiLokalniAvion("4321abcde", "Lockheed", 1));
+            List<string> drzave = new List<string>();
+            drzave.Add("USA");
+            drzave.Add("USSR");
+            OoadWings.Avioni.Add(new PutnickiInostraniAvion("ussr4ever", "Mig", 2, drzave));
         }
 
         public static string UnesiKorisnickiId()
@@ -244,15 +243,12 @@ namespace OOAD_Zadaca1
             bool ispravan = false;
             while (!ispravan)
             {
-                try
+                Console.Write("\nUnesite id aviona: ");
+                id = Console.ReadLine();
+                Match match = Regex.Match(id, "[^a-z1-5]");
+                if (id.Length==9 && !match.Success)
                 {
-                    Console.Write("\nUnesite id aviona: ");
-                    id = Console.ReadLine();
                     ispravan = true;
-                }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine(e.Message);
                 }
             }
 
@@ -261,29 +257,36 @@ namespace OOAD_Zadaca1
             Console.Write("\nUnesite broj sjedista: ");
             ulaz = Console.ReadLine();
             brojSjedista = Int32.Parse(ulaz);
-            if (tip == 1)
+            try
             {
-                PutnickiLokalniAvion putnickiLokalniAvion = new PutnickiLokalniAvion(id, vrsta, brojSjedista);
-                //OoadWings.DodajAvion(putnickiLokalniAvion);
-                return putnickiLokalniAvion;
+                if (tip == 1)
+                {
+                    PutnickiLokalniAvion putnickiLokalniAvion = new PutnickiLokalniAvion(id, vrsta, brojSjedista);
+                    //OoadWings.DodajAvion(putnickiLokalniAvion);
+                    return putnickiLokalniAvion;
+                }
+                else if (tip == 2)
+                {
+                    Console.Write("\nUnesite drzave u koje leti avion (odvojene razmakom): ");
+                    ulaz = Console.ReadLine();
+                    string[] strings = ulaz.Split(" ");
+                    List<string> drzave = new List<string>(strings);
+                    PutnickiInostraniAvion putnickiInostraniAvion =
+                        new PutnickiInostraniAvion(id, vrsta, brojSjedista, drzave);
+                    return putnickiInostraniAvion;
+                }
+                else if (tip == 3)
+                {
+                    Console.Write("\nUnesite ukupni kapacitet aviona: ");
+                    ulaz = Console.ReadLine();
+                    int ukupniKapacitet = Int32.Parse(ulaz);
+                    TeretniAvion teretniAvion = new TeretniAvion(id, vrsta, brojSjedista, ukupniKapacitet);
+                    return teretniAvion;
+                }
             }
-            else if (tip == 2)
+            catch (ArgumentException e)
             {
-                Console.Write("\nUnesite drzave u koje leti avion (odvojene razmakom): ");
-                ulaz = Console.ReadLine();
-                string[] strings = ulaz.Split(" ");
-                List<string> drzave = new List<string>(strings);
-                PutnickiInostraniAvion putnickiInostraniAvion =
-                    new PutnickiInostraniAvion(id, vrsta, brojSjedista, drzave);
-                return putnickiInostraniAvion;
-            }
-            else if (tip == 3)
-            {
-                Console.Write("\nUnesite ukupni kapacitet aviona: ");
-                ulaz = Console.ReadLine();
-                int ukupniKapacitet = Int32.Parse(ulaz);
-                TeretniAvion teretniAvion = new TeretniAvion(id, vrsta, brojSjedista, ukupniKapacitet);
-                return teretniAvion;
+                Console.WriteLine(e.Message);
             }
 
             return null;

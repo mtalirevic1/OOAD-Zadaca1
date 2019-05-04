@@ -52,9 +52,9 @@ namespace OOAD_Zadaca1
 
         protected Avion(string id, string vrsta, int brojSjedista)
         {
-            _Id = id;
-            _Vrsta = vrsta;
-            _BrojSjedista = brojSjedista;
+            Id = id;
+            Vrsta = vrsta;
+            BrojSjedista = brojSjedista;
         }
 
         public abstract double ObracunajCijenuIznajmljivanja(double brojDana, double iznosKaucije);

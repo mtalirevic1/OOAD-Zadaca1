@@ -53,9 +53,9 @@ namespace OOAD_Zadaca1
 
         protected Klijent(string id, string ime, string prezime, DateTime dateTime)
         {
-            _Id = id;
-            _Ime = ime;
-            _Prezime = prezime;
+            Id = id;
+            Ime = ime;
+            Prezime = prezime;
             _dateTime = dateTime;
         }
 

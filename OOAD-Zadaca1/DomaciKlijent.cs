@@ -12,9 +12,9 @@ namespace OOAD_Zadaca1
         {
         }
 
-        public override void PlatiKauciju(double iznos)
+        public override double PlatiKauciju()
         {
-            
+            return 50;
         }
     }
 }

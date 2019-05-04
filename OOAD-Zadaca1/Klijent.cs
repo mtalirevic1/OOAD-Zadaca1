@@ -49,7 +49,7 @@ namespace OOAD_Zadaca1
             set { _dateTime = value; }
         }
 
-        public abstract void PlatiKauciju(double iznos);
+        public abstract double PlatiKauciju();
 
         protected Klijent(string id, string ime, string prezime, DateTime dateTime)
         {

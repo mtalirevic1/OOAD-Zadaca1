@@ -34,9 +34,9 @@ namespace OOAD_Zadaca1
             _Drzava = drzava;
         }
 
-        public override void PlatiKauciju(double iznos)
+        public override double PlatiKauciju()
         {
-            
+            return 100;
         }
     }
 }

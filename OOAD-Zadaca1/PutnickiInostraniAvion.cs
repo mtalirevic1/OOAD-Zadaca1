@@ -42,5 +42,17 @@ namespace OOAD_Zadaca1
 
             return cijena;
         }
+        
+        public override string ToString()
+        {
+            string drzave = "";
+            foreach (string VARIABLE in Drzave)
+            {
+                drzave = drzave + VARIABLE + " ";
+            }
+            
+            return "Putnicki avion za inostrane letove ID: " + Id + " Vrsta: " + Vrsta + " Broj sjedišta: " +
+                   BrojSjedista+" Leti u države: "+drzave;
+        }
     }
 }

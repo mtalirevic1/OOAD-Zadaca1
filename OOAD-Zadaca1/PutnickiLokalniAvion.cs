@@ -30,5 +30,11 @@ namespace OOAD_Zadaca1
 
             return cijena;
         }
+
+        public override string ToString()
+        {
+            return "Putnicki avion za lokalne letove ID: " + Id + " Vrsta: " + Vrsta + " Broj sjedišta: " +
+                   BrojSjedista;
+        }
     }
 }

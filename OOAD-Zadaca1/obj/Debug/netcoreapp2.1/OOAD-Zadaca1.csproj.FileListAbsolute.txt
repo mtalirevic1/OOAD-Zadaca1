@@ -1,0 +1,11 @@
+C:\Users\talir\RiderProjects\OOAD-Zadaca1\OOAD-Zadaca1\bin\Debug\netcoreapp2.1\OOAD-Zadaca1.deps.json
+C:\Users\talir\RiderProjects\OOAD-Zadaca1\OOAD-Zadaca1\bin\Debug\netcoreapp2.1\OOAD-Zadaca1.runtimeconfig.json
+C:\Users\talir\RiderProjects\OOAD-Zadaca1\OOAD-Zadaca1\bin\Debug\netcoreapp2.1\OOAD-Zadaca1.runtimeconfig.dev.json
+C:\Users\talir\RiderProjects\OOAD-Zadaca1\OOAD-Zadaca1\bin\Debug\netcoreapp2.1\OOAD-Zadaca1.dll
+C:\Users\talir\RiderProjects\OOAD-Zadaca1\OOAD-Zadaca1\bin\Debug\netcoreapp2.1\OOAD-Zadaca1.pdb
+C:\Users\talir\RiderProjects\OOAD-Zadaca1\OOAD-Zadaca1\obj\Debug\netcoreapp2.1\OOAD-Zadaca1.csprojAssemblyReference.cache
+C:\Users\talir\RiderProjects\OOAD-Zadaca1\OOAD-Zadaca1\obj\Debug\netcoreapp2.1\OOAD-Zadaca1.csproj.CoreCompileInputs.cache
+C:\Users\talir\RiderProjects\OOAD-Zadaca1\OOAD-Zadaca1\obj\Debug\netcoreapp2.1\OOAD-Zadaca1.AssemblyInfoInputs.cache
+C:\Users\talir\RiderProjects\OOAD-Zadaca1\OOAD-Zadaca1\obj\Debug\netcoreapp2.1\OOAD-Zadaca1.AssemblyInfo.cs
+C:\Users\talir\RiderProjects\OOAD-Zadaca1\OOAD-Zadaca1\obj\Debug\netcoreapp2.1\OOAD-Zadaca1.dll
+C:\Users\talir\RiderProjects\OOAD-Zadaca1\OOAD-Zadaca1\obj\Debug\netcoreapp2.1\OOAD-Zadaca1.pdb

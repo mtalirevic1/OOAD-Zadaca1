@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace OOAD_Zadaca1
 {
-    public class OoadWings : Ipretraga
+    public class OoadWings : Ipretraga, Iiznajmljivanje
     {
         private List<Klijent> _Klijenti;
         public List<Klijent> Klijenti
@@ -18,10 +19,19 @@ namespace OOAD_Zadaca1
             set { _Avioni = value;}
         }
 
-        public OoadWings(List<Klijent> klijenti, List<Avion> avioni)
+        private Dictionary<string, List<Avion>> _AktivniNajami;
+
+        public Dictionary<string, List<Avion>> AktivniNajami
+        {
+            get { return _AktivniNajami; }
+            set { _AktivniNajami = value; }
+        }
+
+        public OoadWings(List<Klijent> klijenti, List<Avion> avioni, Dictionary<string, List<Avion>> aktivniNajami)
         {
             _Klijenti = klijenti;
             _Avioni = avioni;
+            _AktivniNajami = aktivniNajami;
         }
 
         public void DodajAvion(Avion avion)
@@ -62,6 +72,23 @@ namespace OOAD_Zadaca1
             }
             
             return lista;
+        }
+
+        public void IznajmiVozilo(Avion a, string kid)
+        {
+            List<Avion> lista=new List<Avion>();
+            lista.Add(a);
+            if (!AktivniNajami.TryAdd(kid, lista))
+            {
+                AktivniNajami[kid].Add(a);
+            }
+
+            _Avioni.Remove(a);
+        }
+
+        public void VratiVozilo(Avion a, string kid)
+        {
+            AktivniNajami[kid].Remove(a);
         }
     }
 }

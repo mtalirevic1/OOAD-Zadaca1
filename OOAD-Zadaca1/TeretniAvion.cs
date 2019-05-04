@@ -33,5 +33,11 @@ namespace OOAD_Zadaca1
             }
             return cijena;
         }
+        
+        public override string ToString()
+        {
+            return "Teretni avion ID: " + Id + " Vrsta: " + Vrsta + " Broj sjedišta: " +
+                   BrojSjedista+" Ukupni kapacitet: "+UkupniKapacitet+" t";
+        }
     }
 }

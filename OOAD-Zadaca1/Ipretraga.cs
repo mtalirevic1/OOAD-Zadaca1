@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+
 namespace OOAD_Zadaca1
 {
     public interface Ipretraga
     {
-        Avion PretraziPrekoId(string id);
-        bool PretraziPrekoAtributa(Avion a);
+        List<Avion> PretraziPrekoId(string id);
+        List<Avion> PretraziPrekoAtributa(Avion a);
     }
 }

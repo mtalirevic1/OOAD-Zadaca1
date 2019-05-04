@@ -56,5 +56,29 @@ namespace OOAD_Zadaca1
             _Vrsta = vrsta;
             _BrojSjedista = brojSjedista;
         }
+
+        public abstract double ObracunajCijenuIznajmljivanja(int brojDana, double iznosKaucije);
+        
+
+        private bool Equals(Avion other)
+        {
+            return string.Equals(_Vrsta, other._Vrsta) && _BrojSjedista == other._BrojSjedista;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Avion) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((_Vrsta != null ? _Vrsta.GetHashCode() : 0) * 397) ^ _BrojSjedista;
+            }
+        }
     }
 }

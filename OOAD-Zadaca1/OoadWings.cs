@@ -24,22 +24,44 @@ namespace OOAD_Zadaca1
             _Avioni = avioni;
         }
 
-        public Avion PretraziPrekoId(string id)
+        public void DodajAvion(Avion avion)
         {
+            _Avioni.Add(avion);
+        }
+
+        public void DodajKlijenta(Klijent klijent)
+        {
+            _Klijenti.Add(klijent);
+        }
+
+        public List<Avion> PretraziPrekoId(string id)
+        {
+            List<Avion> lista=new List<Avion>();
+            
             foreach (Avion avion in _Avioni)
             {
                 if (avion.Id.Equals(id))
                 {
-                    return avion;
+                    lista.Add(avion);
                 }
             }
             
-            return null;
+            return lista;
         }
 
-        public bool PretraziPrekoAtributa(Avion a)
+        public List<Avion> PretraziPrekoAtributa(Avion a)
         {
-            throw new System.NotImplementedException();
+            List<Avion> lista=new List<Avion>();
+            
+            foreach (Avion avion in _Avioni)
+            {
+                if (avion.Equals(a))
+                {
+                    lista.Add(avion);
+                }
+            }
+            
+            return lista;
         }
     }
 }

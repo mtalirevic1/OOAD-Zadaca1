@@ -4,6 +4,7 @@ namespace OOAD_Zadaca1
 {
     public class StraniKlijent : Klijent
     {
+        private const double IznosKaucije = 100;
         private string _Grad;
         public string Grad
         {
@@ -36,7 +37,7 @@ namespace OOAD_Zadaca1
 
         public override double PlatiKauciju()
         {
-            return 100;
+            return IznosKaucije;
         }
     }
 }

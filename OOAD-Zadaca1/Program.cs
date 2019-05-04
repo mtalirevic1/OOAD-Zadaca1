@@ -21,7 +21,7 @@ namespace OOAD_Zadaca1
                 while (izbor != 0 && izbor != 1 && izbor != 2 && izbor != 3 && izbor != 4 && izbor != 5)
                 {
                     Console.Write(
-                        "Odaberite zeljenu opciju:\n0 za kraj programa\n1 za kreiranje novog vozila\n2 za kreiranje novog klijenta\n3 za iznajmljivanje vozila\n4 za povrat vozila i plaćanje\n5 za ispis liste obavijesti\nOdabir: ");
+                        "\nOdaberite zeljenu opciju:\n0 za kraj programa\n1 za kreiranje novog vozila\n2 za kreiranje novog klijenta\n3 za iznajmljivanje vozila\n4 za povrat vozila i plaćanje\n5 za ispis liste obavijesti\nOdabir: ");
 
                     ulaz = Console.ReadLine();
                     izbor = Int32.Parse(ulaz);
@@ -120,7 +120,7 @@ namespace OOAD_Zadaca1
                         rezultat = OoadWings.PretraziPrekoAtributa(UnesiVozilo());
                     }
 
-                    Console.Write("\nOdaberite jedan od rezultata: ");
+                    Console.Write("\nOdaberite jedan od rezultata:\n ");
                     int i = 1;
                     foreach (Avion avion in rezultat)
                     {
@@ -170,7 +170,7 @@ namespace OOAD_Zadaca1
                         }
                     }
 
-                    Console.Write("\nVozilo uspješno iznajmljeno. Kaucija iznosi: " + kaucija);
+                    Console.Write("\nVozilo uspješno iznajmljeno. Kaucija iznosi: " + kaucija + " KM");
                 }
                 else if (izbor == 4)
                 {
@@ -179,7 +179,7 @@ namespace OOAD_Zadaca1
                     Console.Write("\nUnesite id aviona za povratak: ");
                     id = Console.ReadLine();
                     double ukupnaCijena = OoadWings.VratiVozilo(id, kid);
-                    Console.Write("\nVozilo uspješno vraćeno. Ukupna cijena iznosi: " + ukupnaCijena);
+                    Console.Write("\nVozilo uspješno vraćeno. Ukupna cijena iznosi: " + ukupnaCijena +" KM");
                 }
                 else if (izbor == 5)
                 {

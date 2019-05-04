@@ -9,8 +9,11 @@ namespace OOAD_Zadaca1
 
         static void Main(string[] args)
         {
-            OoadWings = new OoadWings(new List<Klijent>(), new List<Avion>(),new Dictionary<string, List<Tuple<Avion,DateTime,DateTime>>>());
-
+            OoadWings = new OoadWings(new List<Klijent>(), new List<Avion>(),
+                new Dictionary<string, List<Tuple<Avion, DateTime, DateTime>>>());
+               
+            unesiPodatke();
+            
             for (;;)
             {
                 int izbor = -1;
@@ -93,9 +96,8 @@ namespace OOAD_Zadaca1
                 }
                 else if (izbor == 3)
                 {
-
                     string kid = UnesiKorisnickiId();
-                    
+
                     int tip = -1;
                     while (tip != 1 && tip != 2)
                     {
@@ -127,7 +129,7 @@ namespace OOAD_Zadaca1
                     }
 
                     tip = -1;
-                    while (!(tip>= 1 && tip <=rezultat.Count))
+                    while (!(tip >= 1 && tip <= rezultat.Count))
                     {
                         Console.Write("\nOdabir: ");
                         ulaz = Console.ReadLine();
@@ -135,7 +137,7 @@ namespace OOAD_Zadaca1
                     }
 
                     i = tip - 1;
-                    
+
                     Console.Write("\nUnesite datum početka najama (dd.MM.yyyy): ");
                     string[] strings;
                     do
@@ -144,8 +146,9 @@ namespace OOAD_Zadaca1
                         strings = ulaz.Split(".");
                     } while (strings.Length != 3);
 
-                    DateTime d1 = new DateTime(Int32.Parse(strings[2]), Int32.Parse(strings[1]), Int32.Parse(strings[0]));
-                    
+                    DateTime d1 = new DateTime(Int32.Parse(strings[2]), Int32.Parse(strings[1]),
+                        Int32.Parse(strings[0]));
+
                     Console.Write("\nUnesite datum kraja najama (dd.MM.yyyy): ");
                     do
                     {
@@ -153,11 +156,12 @@ namespace OOAD_Zadaca1
                         strings = ulaz.Split(".");
                     } while (strings.Length != 3);
 
-                    DateTime d2 = new DateTime(Int32.Parse(strings[2]), Int32.Parse(strings[1]), Int32.Parse(strings[0]));
-                    
+                    DateTime d2 = new DateTime(Int32.Parse(strings[2]), Int32.Parse(strings[1]),
+                        Int32.Parse(strings[0]));
+
                     double kaucija = 0;
-                    Tuple<Avion,DateTime,DateTime> tuple=new Tuple<Avion, DateTime, DateTime>(rezultat[i],d1,d2);
-                    OoadWings.IznajmiVozilo(tuple,kid);
+                    Tuple<Avion, DateTime, DateTime> tuple = new Tuple<Avion, DateTime, DateTime>(rezultat[i], d1, d2);
+                    OoadWings.IznajmiVozilo(tuple, kid);
                     foreach (Klijent k in OoadWings.Klijenti)
                     {
                         if (kid == k.Id)
@@ -165,8 +169,8 @@ namespace OOAD_Zadaca1
                             kaucija = k.PlatiKauciju();
                         }
                     }
-                    Console.Write("\nVozilo uspješno iznajmljeno. Kaucija iznosi: "+kaucija);
 
+                    Console.Write("\nVozilo uspješno iznajmljeno. Kaucija iznosi: " + kaucija);
                 }
                 else if (izbor == 4)
                 {
@@ -174,7 +178,8 @@ namespace OOAD_Zadaca1
                     string id = "";
                     Console.Write("\nUnesite id aviona za povratak: ");
                     id = Console.ReadLine();
-                    OoadWings.VratiVozilo(id,kid);
+                    double ukupnaCijena = OoadWings.VratiVozilo(id, kid);
+                    Console.Write("\nVozilo uspješno vraćeno. Ukupna cijena iznosi: " + ukupnaCijena);
                 }
                 else if (izbor == 5)
                 {
@@ -182,10 +187,21 @@ namespace OOAD_Zadaca1
             }
         }
 
+        public static void unesiPodatke()
+        {
+            OoadWings.Klijenti.Add(new DomaciKlijent("123456","Mujo","Mujic",new DateTime(1985,4,25)));
+            OoadWings.Klijenti.Add(new StraniKlijent("654321","Hans","Ziegler",new DateTime(1975,7,12),"Berlin","Njemačka"));
+            OoadWings.Avioni.Add(new TeretniAvion("abcde1234","Antonov",100,0.5));
+            OoadWings.Avioni.Add(new PutnickiLokalniAvion("4321abcde","Lockheed",1));
+            List<string> drzave=new List<string>();
+            drzave.Add("USA"); drzave.Add("USSR");
+            OoadWings.Avioni.Add(new PutnickiInostraniAvion("ussr4ever","Mig",2,drzave));
+        }
+
         public static string UnesiKorisnickiId()
         {
             bool ispravan = false;
-            string kid="";
+            string kid = "";
             while (!ispravan)
             {
                 try

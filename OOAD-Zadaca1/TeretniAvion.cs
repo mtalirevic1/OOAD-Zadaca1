@@ -24,7 +24,7 @@ namespace OOAD_Zadaca1
         {
         }
 
-        public override double ObracunajCijenuIznajmljivanja(int brojDana, double iznosKaucije)
+        public override double ObracunajCijenuIznajmljivanja(double brojDana, double iznosKaucije)
         {
             double cijena = Cijena * brojDana + UkupniKapacitet*1000*Koeficijent; //konverzija iz tona u kg
             if (cijena > iznosKaucije)

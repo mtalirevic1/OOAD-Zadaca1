@@ -19,15 +19,15 @@ namespace OOAD_Zadaca1
             set { _Avioni = value;}
         }
 
-        private Dictionary<string, List<Avion>> _AktivniNajami;
+        private Dictionary<string, List<Tuple<Avion,DateTime,DateTime>>> _AktivniNajami;
 
-        public Dictionary<string, List<Avion>> AktivniNajami
+        public Dictionary<string, List<Tuple<Avion,DateTime,DateTime>>> AktivniNajami
         {
             get { return _AktivniNajami; }
             set { _AktivniNajami = value; }
         }
 
-        public OoadWings(List<Klijent> klijenti, List<Avion> avioni, Dictionary<string, List<Avion>> aktivniNajami)
+        public OoadWings(List<Klijent> klijenti, List<Avion> avioni, Dictionary<string, List<Tuple<Avion,DateTime,DateTime>>> aktivniNajami)
         {
             _Klijenti = klijenti;
             _Avioni = avioni;
@@ -74,21 +74,34 @@ namespace OOAD_Zadaca1
             return lista;
         }
 
-        public void IznajmiVozilo(Avion a, string kid)
+        public void IznajmiVozilo(Tuple<Avion,DateTime,DateTime> a, string kid)
         {
-            List<Avion> lista=new List<Avion>();
+            List<Tuple<Avion,DateTime,DateTime>> lista=new List<Tuple<Avion,DateTime,DateTime>>();
             lista.Add(a);
             if (!AktivniNajami.TryAdd(kid, lista))
             {
                 AktivniNajami[kid].Add(a);
             }
 
-            _Avioni.Remove(a);
+            _Avioni.Remove(a.Item1);
         }
 
-        public void VratiVozilo(Avion a, string kid)
+        public double VratiVozilo(string a, string kid)
         {
-            AktivniNajami[kid].Remove(a);
+            double daniIzmedju = -1;
+            
+            for (int i = 0; i < AktivniNajami[kid].Count; i++)
+            {
+                if (AktivniNajami[kid][i].Item1.Id == a)
+                {
+                    daniIzmedju = (AktivniNajami[kid][i].Item3 - AktivniNajami[kid][i].Item2).TotalDays;
+                    _Avioni.Add(AktivniNajami[kid][i].Item1);
+                    AktivniNajami[kid].Remove(AktivniNajami[kid][i]);
+                    break;
+                }
+            }
+
+            return daniIzmedju;
         }
     }
 }

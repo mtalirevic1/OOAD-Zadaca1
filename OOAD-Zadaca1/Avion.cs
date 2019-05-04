@@ -57,7 +57,7 @@ namespace OOAD_Zadaca1
             _BrojSjedista = brojSjedista;
         }
 
-        public abstract double ObracunajCijenuIznajmljivanja(int brojDana, double iznosKaucije);
+        public abstract double ObracunajCijenuIznajmljivanja(double brojDana, double iznosKaucije);
         
 
         private bool Equals(Avion other)

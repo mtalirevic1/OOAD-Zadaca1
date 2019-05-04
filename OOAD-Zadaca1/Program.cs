@@ -9,7 +9,7 @@ namespace OOAD_Zadaca1
 
         static void Main(string[] args)
         {
-            OoadWings = new OoadWings(new List<Klijent>(), new List<Avion>(),new Dictionary<string, List<Avion>>());
+            OoadWings = new OoadWings(new List<Klijent>(), new List<Avion>(),new Dictionary<string, List<Tuple<Avion,DateTime,DateTime>>>());
 
             for (;;)
             {
@@ -70,7 +70,7 @@ namespace OOAD_Zadaca1
                     do
                     {
                         ulaz = Console.ReadLine();
-                        strings = ulaz.Split(" ");
+                        strings = ulaz.Split(".");
                     } while (strings.Length != 3);
 
                     dateTime = new DateTime(Int32.Parse(strings[2]), Int32.Parse(strings[1]), Int32.Parse(strings[0]));
@@ -93,29 +93,8 @@ namespace OOAD_Zadaca1
                 }
                 else if (izbor == 3)
                 {
-                    
-                    bool ispravan = false;
-                    string kid="";
-                    while (!ispravan)
-                    {
-                        try
-                        {
-                            Console.Write("\nUnesite korisnički ID: ");
-                            kid = Console.ReadLine();
-                            foreach (Klijent k in OoadWings.Klijenti)
-                            {
-                                if (k.Id == kid)
-                                {
-                                    ispravan = true;
-                                    break;
-                                }
-                            }
-                        }
-                        catch (ArgumentException e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-                    }
+
+                    string kid = UnesiKorisnickiId();
                     
                     int tip = -1;
                     while (tip != 1 && tip != 2)
@@ -156,8 +135,29 @@ namespace OOAD_Zadaca1
                     }
 
                     i = tip - 1;
+                    
+                    Console.Write("\nUnesite datum početka najama (dd.MM.yyyy): ");
+                    string[] strings;
+                    do
+                    {
+                        ulaz = Console.ReadLine();
+                        strings = ulaz.Split(".");
+                    } while (strings.Length != 3);
+
+                    DateTime d1 = new DateTime(Int32.Parse(strings[2]), Int32.Parse(strings[1]), Int32.Parse(strings[0]));
+                    
+                    Console.Write("\nUnesite datum kraja najama (dd.MM.yyyy): ");
+                    do
+                    {
+                        ulaz = Console.ReadLine();
+                        strings = ulaz.Split(".");
+                    } while (strings.Length != 3);
+
+                    DateTime d2 = new DateTime(Int32.Parse(strings[2]), Int32.Parse(strings[1]), Int32.Parse(strings[0]));
+                    
                     double kaucija = 0;
-                    OoadWings.IznajmiVozilo(rezultat[i],kid);
+                    Tuple<Avion,DateTime,DateTime> tuple=new Tuple<Avion, DateTime, DateTime>(rezultat[i],d1,d2);
+                    OoadWings.IznajmiVozilo(tuple,kid);
                     foreach (Klijent k in OoadWings.Klijenti)
                     {
                         if (kid == k.Id)
@@ -170,11 +170,44 @@ namespace OOAD_Zadaca1
                 }
                 else if (izbor == 4)
                 {
+                    string kid = UnesiKorisnickiId();
+                    string id = "";
+                    Console.Write("\nUnesite id aviona za povratak: ");
+                    id = Console.ReadLine();
+                    OoadWings.VratiVozilo(id,kid);
                 }
                 else if (izbor == 5)
                 {
                 }
             }
+        }
+
+        public static string UnesiKorisnickiId()
+        {
+            bool ispravan = false;
+            string kid="";
+            while (!ispravan)
+            {
+                try
+                {
+                    Console.Write("\nUnesite korisnički ID: ");
+                    kid = Console.ReadLine();
+                    foreach (Klijent k in OoadWings.Klijenti)
+                    {
+                        if (k.Id == kid)
+                        {
+                            ispravan = true;
+                            break;
+                        }
+                    }
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return kid;
         }
 
         public static Avion UnesiVozilo()

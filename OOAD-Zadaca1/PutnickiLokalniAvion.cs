@@ -15,7 +15,7 @@ namespace OOAD_Zadaca1
         {
         }
 
-        public override double ObracunajCijenuIznajmljivanja(int brojDana, double iznosKaucije)
+        public override double ObracunajCijenuIznajmljivanja(double brojDana, double iznosKaucije)
         {
             double cijena = Cijena * brojDana;
             if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday || DateTime.Now.DayOfWeek == DayOfWeek.Saturday)

@@ -12,7 +12,7 @@ namespace OOAD_Zadaca1
             {
                 if (value.Length != 6)
                 {
-                    throw new Exception("Identifikacijski broj mora imati 6 karaktera");
+                    throw new ArgumentException("Identifikacijski broj mora imati 6 karaktera");
                 }
               _Id = value;
             }

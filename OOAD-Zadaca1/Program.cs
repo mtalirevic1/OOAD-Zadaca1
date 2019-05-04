@@ -5,14 +5,12 @@ namespace OOAD_Zadaca1
 {
     class Program
     {
-
         private static OoadWings OoadWings;
-        
+
         static void Main(string[] args)
         {
-            
-            OoadWings=new OoadWings(new List<Klijent>(), new List<Avion>());
-            
+            OoadWings = new OoadWings(new List<Klijent>(), new List<Avion>());
+
             for (;;)
             {
                 int izbor = -1;
@@ -42,10 +40,23 @@ namespace OOAD_Zadaca1
                         tip = Int32.Parse(ulaz);
                     }
 
-                    string id, vrsta;
+                    string id = "", vrsta;
                     int brojSjedista;
-                    Console.Write("\nUnesite id novog aviona: ");
-                    id = Console.ReadLine();
+                    bool ispravan = false;
+                    while (!ispravan)
+                    {
+                        try
+                        {
+                            Console.Write("\nUnesite id novog aviona: ");
+                            id = Console.ReadLine();
+                            ispravan = true;
+                        }
+                        catch (ArgumentException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
+
                     Console.Write("\nUnesite vrstu novog aviona: ");
                     vrsta = Console.ReadLine();
                     Console.Write("\nUnesite broj sjedista: ");
@@ -53,7 +64,7 @@ namespace OOAD_Zadaca1
                     brojSjedista = Int32.Parse(ulaz);
                     if (tip == 1)
                     {
-                        PutnickiLokalniAvion putnickiLokalniAvion=new PutnickiLokalniAvion(id,vrsta,brojSjedista);
+                        PutnickiLokalniAvion putnickiLokalniAvion = new PutnickiLokalniAvion(id, vrsta, brojSjedista);
                         OoadWings.DodajAvion(putnickiLokalniAvion);
                     }
                     else if (tip == 2)
@@ -61,39 +72,88 @@ namespace OOAD_Zadaca1
                         Console.Write("\nUnesite drzave u koje leti novi avion (odvojene razmakom): ");
                         ulaz = Console.ReadLine();
                         string[] strings = ulaz.Split(" ");
-                        List<string> drzave=new List<string>(strings);
-                        PutnickiInostraniAvion putnickiInostraniAvion=new PutnickiInostraniAvion(id,vrsta,brojSjedista,drzave);
+                        List<string> drzave = new List<string>(strings);
+                        PutnickiInostraniAvion putnickiInostraniAvion =
+                            new PutnickiInostraniAvion(id, vrsta, brojSjedista, drzave);
                     }
                     else if (tip == 3)
                     {
                         Console.Write("\nUnesite ukupni kapacitet novog aviona: ");
                         ulaz = Console.ReadLine();
-                        int ukupniKapacitet =Int32.Parse(ulaz);
-                        TeretniAvion teretniAvion=new TeretniAvion(id,vrsta,brojSjedista,ukupniKapacitet);
+                        int ukupniKapacitet = Int32.Parse(ulaz);
+                        TeretniAvion teretniAvion = new TeretniAvion(id, vrsta, brojSjedista, ukupniKapacitet);
                     }
                 }
                 else if (izbor == 2)
                 {
-                    Console.Write("\nUnesite ime novog studenta: ");
-                    ulaz.nextLine();
-                    String ime = ulaz.nextLine();
-                    Console.Write("\nUnesite prezime novog studenta: ");
-                    String prezime = ulaz.nextLine();
-                    Console.Write("\nUnesite broj indeksa novog studenta: ");
-                    int br = ulaz.nextInt();
-                    s = new Student(ime, prezime, br);
+                    int tip = -1;
+                    while (tip != 1 && tip != 2)
+                    {
+                        Console.Write(
+                            "\nOdaberite tip klijenta:\n1 - Domaci klijent\n2 - Strani klijent\nOdabir: ");
+
+                        ulaz = Console.ReadLine();
+                        tip = Int32.Parse(ulaz);
+                    }
+
+                    string id="", ime, prezime;
+                    DateTime dateTime;
+                    bool ispravan = false;
+                    while (!ispravan)
+                    {
+                        try
+                        {
+                            Console.Write("\nUnesite id novog klijenta: ");
+                            id = Console.ReadLine();
+                            ispravan = true;
+                        }
+                        catch (ArgumentException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
+
+                    Console.Write("\nUnesite ime novog klijenta: ");
+                    ime = Console.ReadLine();
+                    Console.Write("\nUnesite prezime novog klijenta: ");
+                    prezime = Console.ReadLine();
+                    Console.Write("\nUnesite datum rođenja klijenta (dd.MM.yyyy): ");
+                    string[] strings;
+                    do
+                    {
+                        ulaz = Console.ReadLine();
+                        strings = ulaz.Split(" ");
+                    } while (strings.Length != 3);
+
+                    dateTime = new DateTime(Int32.Parse(strings[2]), Int32.Parse(strings[1]), Int32.Parse(strings[0]));
+
+                    if (tip == 1)
+                    {
+                        DomaciKlijent domaciKlijent=new DomaciKlijent(id,ime,prezime,dateTime);
+                        OoadWings.DodajKlijenta(domaciKlijent);
+                    } 
+                    else if (tip == 2)
+                    {
+                        string grad, drzava;
+                        Console.Write("\nUnesite drzavu novog klijenta: ");
+                        drzava = Console.ReadLine();
+                        Console.Write("\nUnesite grad novog klijenta: ");
+                        grad = Console.ReadLine();
+                        StraniKlijent straniKlijent=new StraniKlijent(id,ime,prezime,dateTime,grad,drzava);
+                        OoadWings.DodajKlijenta(straniKlijent);
+                    }
                 }
                 else if (izbor == 3)
                 {
-                    p.upisi(s);
+                    
                 }
                 else if (izbor == 4)
                 {
-                    p.ispisi(s);
+                    
                 }
                 else if (izbor == 5)
                 {
-                    s = null;
+                    
                 }
             }
         }

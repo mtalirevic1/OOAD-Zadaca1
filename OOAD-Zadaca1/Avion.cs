@@ -16,13 +16,13 @@ namespace OOAD_Zadaca1
             {
                 if (value.Length != 9)
                 {
-                    throw new Exception("Identifikacijski broj mora imati 9 karaktera");
+                    throw new ArgumentException("Identifikacijski broj mora imati 9 karaktera");
                 }
 
                 Match match = Regex.Match(value, "[^a-z1-5]");
                 if (match.Success)
                 {
-                    throw new Exception("Identifikacijski broj mora biti kombinacija malih slova i cifara od 1 do 5");
+                    throw new ArgumentException("Identifikacijski broj mora biti kombinacija malih slova i cifara od 1 do 5");
                 }
 
                 _Id = value;
